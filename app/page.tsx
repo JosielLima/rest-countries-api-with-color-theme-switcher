@@ -1,31 +1,31 @@
-import Image from "next/image";
+import { Card, Header, Footer } from "./components";
 
+const countries = [
+  {
+    id: "1",
+    country: "Brasil",
+    capital: "Brasília",
+    region: "America do Sul",
+    population: "211.897.000",
+  },
+  {
+    id: "2",
+    country: "EUA",
+    capital: "Washington",
+    region: "America do Norte",
+    population: "391.900.000",
+  },
+];
 export default function Home() {
   return (
     <>
-      <header>Cabeçalho</header>
-      <main className="flex-1">
-        <div>Conteúdo</div>  
+      <Header />
+      <main className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {countries.map((country) => (
+          <Card key={country.id} id={country.id} country={country.country} capital={country.capital} region={country.region} population={country.population} />
+        ))}
       </main>
-      <footer>
-        Challenge by{" "}
-        <a
-          href="https://www.frontendmentor.io?ref=challenge&challenge=rest-countries-api-with-color-theme-switcher&ref=challenge&ref=challenge"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Frontend Mentor
-        </a>
-        . Coded by{" "}
-        <a
-          href="https://github.com/josielLima"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Josiel Lima
-        </a>
-        .
-      </footer>
+      <Footer />
     </>
   );
 }
