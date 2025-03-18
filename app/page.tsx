@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Card, Header, Footer } from "./components";
+import { countriesApi } from "./services";
 
 type Country = {
   cca3: string;
@@ -23,15 +24,13 @@ export default function Home() {
 
   useEffect(() => {
     const fetchCountries = async () => {
-      try {
-        const response = await fetch("https://restcountries.com/v3.1/all?fields=cca3,flags,name,capital,region,population");
-        const data = await response.json();
-        setCountries(data);
-      } catch (error) {
-        setError("Failed to fetch countries");
-      } finally {
-        setLoading(false);
+      const [response, error] = await countriesApi.getAll();
+      if (error) {
+        setError(error);
+      } else {
+        setCountries(response);
       }
+      setLoading(false);
     };
     fetchCountries();
   }, []);
