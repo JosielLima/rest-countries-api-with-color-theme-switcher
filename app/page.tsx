@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Card, Header, Footer } from "./components";
 import { countriesApi } from "./services";
+import Link from "next/link";
 
 type Country = {
   cca3: string;
@@ -47,7 +48,9 @@ export default function Home() {
       <Header />
       <main className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {countries.map(({cca3, flags, name, capital, region, population  }, index) => (
-          <Card key={cca3} index={index} flag={flags.svg} name={name.common} capital={capital} region={region} population={population}  />
+          <Link key={cca3} href={`/country/${cca3}`}>
+            <Card index={index} flag={flags.svg} name={name.common} capital={capital} region={region} population={population}  />
+          </Link>
         ))}
       </main>
       <Footer />
