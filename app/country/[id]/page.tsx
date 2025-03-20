@@ -69,7 +69,7 @@ export default  function Country() {
   const currencyName = Object.values(currencies ?? {}).map(currency => currency.name).join(', ');
   const currencySymbol = Object.values(currencies ?? {}).map(currency => currency.symbol).join(', ');
   const tldName = tld ?? [];
-  const borderingCountries = borders?.join(', ') ?? "";
+  const borderingCountries = borders ?? [];
 
   return (
     <>
@@ -85,37 +85,37 @@ export default  function Country() {
         <div className="p-4 text-sm text-gray-600">
           <h2 className="text-lg font-semibold mb-2">{countryName} ({id})</h2>
           <div className="space-y-2">
-            <div className="flex items-center gap-1">
-                  <span className="font-semibold">Capital</span>
-                  <span>{capital}</span>
+            <div>
+                  <span className="font-semibold">Capital</span> 
+                  <span>{" "}{capital}</span>
                 </div>
-                <div className="flex items-center gap-1">
+                <div>
                   <span className="font-semibold">Region</span>
-                  <span>{region}</span>
+                  <span>{" "}{region}</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="font-semibold">Sub Region</span>
-                  <span>{subregion}</span>
+                <div>
+                  <span className="font-semibold">Sub Region</span> 
+                  <span>{" "}{subregion}</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="font-semibold">Population</span>
-                  <span>{population}</span>
+                <div>
+                  <span className="font-semibold">Population</span> 
+                  <span>{" "} {population}</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="font-semibold">Top Level Domain</span>
-                  <span>{tldName}</span>
+                <div>
+                  <span className="font-semibold">Top Level Domain</span> 
+                  <span>{" "} {tldName}</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="font-semibold">Currencies</span>
-                  <span>{currencyName} ({currencySymbol})</span>
+                <div>
+                  <span className="font-semibold">Currencies</span> 
+                  <span>{" "} {currencyName} ({currencySymbol})</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="font-semibold">Languages</span>
-                  <span>{languagesName}</span>
+                <div>
+                  <span className="font-semibold">Languages</span> 
+                  <span>{" "} {languagesName}</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="font-semibold">Bordering Countries</span>
-                  <span>{borderingCountries}</span>
+                <div>
+                  <span className="font-semibold">Bordering Countries</span> 
+                  <span className="flex flex-wrap gap-1">{borderingCountries.length > 0 ? borderingCountries.map(border => <Link key={border} href={`/country/${border}`}><button className="bg-gray-200 :hover:bg-gray-300 font-semibold py-2 px-4 rounded">{border}</button></Link>) : 'No bordering countries'}</span>
                 </div>
               </div>
           </div>
