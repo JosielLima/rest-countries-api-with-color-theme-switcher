@@ -16,7 +16,8 @@ const ApiClient = (baseUrl) => ({
 const apiClient = ApiClient('https://restcountries.com/v3.1')
 
 const countriesApi = {
-    getAll: () => apiClient.get('all?fields=cca3,flags,name,capital,region,population')
+    getAll: () => apiClient.get('all?fields=cca3,flags,name,capital,region,population'),
+    getCountry: (id) => apiClient.get(`alpha/${id}?fields=cca3,flags,name,capital,region,population,subregion,languages,currencies,tld,borders`)
 }
 
 export { countriesApi }
