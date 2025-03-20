@@ -1,0 +1,1 @@
+npm next lint && npm tsc --noEmit
