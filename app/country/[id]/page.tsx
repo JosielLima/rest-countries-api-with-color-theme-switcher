@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { countriesApi } from "../../services";
+import { formatNumber } from "../../utils";
 
 
 type Country = {
@@ -104,7 +105,7 @@ export default  function Country() {
             </div>
             <div>
               <span className="font-semibold">Population</span> 
-              <span>{" "} {population}</span>
+              <span>{" "} {formatNumber(population ?? 0)}</span>
             </div>
             <div>
               <span className="font-semibold">Top Level Domain</span> 

@@ -45,7 +45,7 @@ export default function Home() {
     return <div>{error}</div>;
   }
 
-  const sortedCountries = [...countries].sort((a, b) => a.name.common.localeCompare(b.name.common));
+  const sortedCountries = [...countries].sort((a, b) => a.name.common.localeCompare(b.name.common, 'en-US'));
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
