@@ -16,6 +16,7 @@ type Country = {
   capital: string;
   region: string;
   population: number;
+  subregion: string;
 };
 
 export default function Home() {

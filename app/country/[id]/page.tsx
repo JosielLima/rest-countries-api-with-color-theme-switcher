@@ -17,6 +17,18 @@ type Country = {
   capital: string;
   region: string;
   population: number;
+  subregion: string;
+  languages: {
+    [key: string]: string;
+  };
+  currencies: {
+    [key: string]: {
+      name: string;
+      symbol: string;
+    };
+  };
+  tld: string[];
+  borders: string[];
 };
 
 type Params = {
@@ -25,7 +37,6 @@ type Params = {
 
 export default  function Country() {
   const params = useParams<Params>();
-  const name = "Brazil";
 
   const [ country, setCountry ] = useState<Country | null>(null);
   const [ id, setId ] = useState<string | null>(null);
@@ -50,7 +61,16 @@ export default  function Country() {
     }
   }, [id]);
 
-  console.log(country);
+  const { flags, name, capital, region, population, subregion, languages, currencies, tld, borders } = country ?? {};
+  const { svg: flag } = flags ?? {};
+  const { common: countryName } = name ?? {};
+  const languagesName = Object.values(languages ?? {}).join(', ');
+
+  const currencyName = Object.values(currencies ?? {}).map(currency => currency.name).join(', ');
+  const currencySymbol = Object.values(currencies ?? {}).map(currency => currency.symbol).join(', ');
+  const tldName = tld ?? [];
+  const borderingCountries = borders?.join(', ') ?? "";
+
   return (
     <>
       <div className="mb-8">
@@ -60,42 +80,42 @@ export default  function Country() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4">
         <div className="w-full md:max-w-[400px]">
-          <Image className="w-full h-full object-cover" src="/flag-placeholder.svg" alt={`${name} flag`} width={500} height={300} />
+          <Image className="rounded-lg object-cover max-h-80" src={flag || '/flag-placeholder.svg'} alt={`${countryName} flag`} width={500} height={300} priority/>
         </div>
         <div className="p-4 text-sm text-gray-600">
-          <h2 className="text-lg font-semibold mb-2">Brazil ({id})</h2>
+          <h2 className="text-lg font-semibold mb-2">{countryName} ({id})</h2>
           <div className="space-y-2">
             <div className="flex items-center gap-1">
                   <span className="font-semibold">Capital</span>
-                  <span>Brasília</span>
+                  <span>{capital}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">Region</span>
-                  <span>South America</span>
+                  <span>{region}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">Sub Region</span>
-                  <span>211,787,693</span>
+                  <span>{subregion}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">Population</span>
-                  <span>211,787,693</span>
+                  <span>{population}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">Top Level Domain</span>
-                  <span>.br</span>
+                  <span>{tldName}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">Currencies</span>
-                  <span>BRL</span>
+                  <span>{currencyName} ({currencySymbol})</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">Languages</span>
-                  <span>Brazilian Portuguese</span>
+                  <span>{languagesName}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">Bordering Countries</span>
-                  <span>Argentina, Bolivia, Colombia, Ecuador, Guyana, Paraguay, Peru, Suriname, Uruguay, Venezuela</span>
+                  <span>{borderingCountries}</span>
                 </div>
               </div>
           </div>
