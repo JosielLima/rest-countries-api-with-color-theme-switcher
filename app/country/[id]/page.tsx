@@ -13,6 +13,7 @@ type Country = {
   };
   name: {
     common: string;
+    official: string;
   };
   capital: string;
   region: string;
@@ -63,7 +64,7 @@ export default  function Country() {
 
   const { flags, name, capital, region, population, subregion, languages, currencies, tld, borders } = country ?? {};
   const { svg: flag } = flags ?? {};
-  const { common: countryName } = name ?? {};
+  const { common: countryName, official: countryOfficialName } = name ?? {};
   const languagesName = Object.values(languages ?? {}).join(', ');
 
   const currencyName = Object.values(currencies ?? {}).map(currency => currency.name).join(', ');
@@ -85,39 +86,43 @@ export default  function Country() {
         <div className="p-4 text-sm text-gray-600">
           <h2 className="text-lg font-semibold mb-2">{countryName} ({id})</h2>
           <div className="space-y-2">
+          <div>
+              <span className="font-semibold">Official Name</span> 
+              <span>{" "}{countryOfficialName}</span>
+            </div>
             <div>
-                  <span className="font-semibold">Capital</span> 
-                  <span>{" "}{capital}</span>
-                </div>
-                <div>
-                  <span className="font-semibold">Region</span>
-                  <span>{" "}{region}</span>
-                </div>
-                <div>
-                  <span className="font-semibold">Sub Region</span> 
-                  <span>{" "}{subregion}</span>
-                </div>
-                <div>
-                  <span className="font-semibold">Population</span> 
-                  <span>{" "} {population}</span>
-                </div>
-                <div>
-                  <span className="font-semibold">Top Level Domain</span> 
-                  <span>{" "} {tldName}</span>
-                </div>
-                <div>
-                  <span className="font-semibold">Currencies</span> 
-                  <span>{" "} {currencyName} ({currencySymbol})</span>
-                </div>
-                <div>
-                  <span className="font-semibold">Languages</span> 
-                  <span>{" "} {languagesName}</span>
-                </div>
-                <div>
-                  <span className="font-semibold">Bordering Countries</span> 
-                  <span className="flex flex-wrap gap-1">{borderingCountries.length > 0 ? borderingCountries.map(border => <Link key={border} href={`/country/${border}`}><button className="bg-gray-200 :hover:bg-gray-300 font-semibold py-2 px-4 rounded">{border}</button></Link>) : 'No bordering countries'}</span>
-                </div>
-              </div>
+              <span className="font-semibold">Capital</span> 
+              <span>{" "}{capital}</span>
+            </div>
+            <div>
+              <span className="font-semibold">Region</span>
+              <span>{" "}{region}</span>
+            </div>
+            <div>
+              <span className="font-semibold">Sub Region</span> 
+              <span>{" "}{subregion}</span>
+            </div>
+            <div>
+              <span className="font-semibold">Population</span> 
+              <span>{" "} {population}</span>
+            </div>
+            <div>
+              <span className="font-semibold">Top Level Domain</span> 
+              <span>{" "} {tldName}</span>
+            </div>
+            <div>
+              <span className="font-semibold">Currencies</span> 
+              <span>{" "} {currencyName} ({currencySymbol})</span>
+            </div>
+            <div>
+              <span className="font-semibold">Languages</span> 
+              <span>{" "} {languagesName}</span>
+            </div>
+            <div>
+              <span className="font-semibold">Bordering Countries</span> 
+              <span className="flex flex-wrap gap-1">{borderingCountries.length > 0 ? borderingCountries.map(border => <Link key={border} href={`/country/${border}`}><button className="bg-gray-200 :hover:bg-gray-300 font-semibold py-2 px-4 rounded">{border}</button></Link>) : 'No bordering countries'}</span>
+            </div>
+          </div>
           </div>
       </div>
     </>

@@ -44,10 +44,12 @@ export default function Home() {
   if (error) {
     return <div>{error}</div>;
   }
+
+  const sortedCountries = [...countries].sort((a, b) => a.name.common.localeCompare(b.name.common));
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {countries.map(({cca3, flags, name, capital, region, population  }, index) => (
+        {sortedCountries.map(({cca3, flags, name, capital, region, population  }, index) => (
           <Link key={cca3} href={`/country/${cca3}`}>
             <Card index={index} flag={flags.svg} name={name.common} capital={capital} region={region} population={population}  />
           </Link>
