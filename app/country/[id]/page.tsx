@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { countriesApi } from "../../services";
 import { formatNumber } from "../../utils";
+import { Error } from "../../components";
+import { Loading } from "../../components";
 
 
 type Country = {
@@ -42,6 +44,8 @@ export default  function Country() {
 
   const [ country, setCountry ] = useState<Country | null>(null);
   const [ id, setId ] = useState<string | null>(null);
+  const [ loading, setLoading ] = useState(true);
+  const [ error, setError ] = useState<string | null>(null);
 
   useEffect(() => {
     if(params?.id && params.id !== id) {
@@ -53,15 +57,25 @@ export default  function Country() {
     const fetchCountry = async () => {
       const [response, error] = await countriesApi.getCountry(id);
       if (error) {
-        console.error(error);
+        setError(error);
+        setLoading(false);
       } else {
         setCountry(response);
+        setLoading(false);
       }
     };
     if(id) {
       fetchCountry();
     }
   }, [id]);
+
+
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error text={error} />;
+  }
 
   const { flags, name, capital, region, population, subregion, languages, currencies, tld, borders } = country ?? {};
   const { svg: flag } = flags ?? {};
@@ -72,6 +86,7 @@ export default  function Country() {
   const currencySymbol = Object.values(currencies ?? {}).map(currency => currency.symbol).join(', ');
   const tldName = tld ?? [];
   const borderingCountries = borders ?? [];
+  
 
   return (
     <>

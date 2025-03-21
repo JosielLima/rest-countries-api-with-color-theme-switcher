@@ -6,6 +6,8 @@ import { countriesApi } from "./services";
 import Link from "next/link";
 import { Search } from "./components";
 import { Select } from "./components";
+import { Loading } from "./components";
+import { Error } from "./components";
 
 type Country = {
   cca3: string;
@@ -35,6 +37,7 @@ export default function Home() {
         setError(error);
       } else {
         setCountries(response);
+        setLoading(false);
       }
       setLoading(false);
     };
@@ -43,10 +46,10 @@ export default function Home() {
 
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   if (error) {
-    return <div>{error}</div>;
+    return <Error text={error} />;
   }
 
   const regions = ["All Regions",...new Set(countries.map(country => country.region))];
@@ -61,7 +64,7 @@ export default function Home() {
   return (
     <>
       <div className="flex md:flex-row flex-col gap-4 justify-between">
-        <Search search={search} setSearch={setSearch} count={filteredCountries.length} />
+        <Search search={search} setSearch={setSearch} />
         <Select options={regions} selectedRegion={selectedRegion} setSelectedRegion={setSelectedRegion} />
       </div>
       <div className="text-sm text-gray-600">{filteredCountries.length} results</div>
