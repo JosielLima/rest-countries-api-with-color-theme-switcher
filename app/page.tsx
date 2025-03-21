@@ -60,10 +60,11 @@ export default function Home() {
  
   return (
     <>
-      <div className="flex gap-4 justify-between">
+      <div className="flex md:flex-row flex-col gap-4 justify-between">
         <Search search={search} setSearch={setSearch} count={filteredCountries.length} />
         <Select options={regions} selectedRegion={selectedRegion} setSelectedRegion={setSelectedRegion} />
       </div>
+      <div className="text-sm text-gray-600">{filteredCountries.length} results</div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {filteredCountries.map(({cca3, flags, name, capital, region, population  }, index) => (
           <Link key={cca3} href={`/country/${cca3}`}>
