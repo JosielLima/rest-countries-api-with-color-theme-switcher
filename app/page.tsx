@@ -67,8 +67,8 @@ export default function Home() {
         <Search search={search} setSearch={setSearch} />
         <Select options={regions} selectedRegion={selectedRegion} setSelectedRegion={setSelectedRegion} />
       </div>
-      <div className="text-sm text-gray-600">{filteredCountries.length} results</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="text-sm text-gray-600 font-semibold my-2">{filteredCountries.length} results</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-32">
         {filteredCountries.map(({cca3, flags, name, capital, region, population  }, index) => (
           <Link key={cca3} href={`/country/${cca3}`}>
             <Card index={index} flag={flags.svg} name={name.common} capital={capital} region={region} population={population}  />

@@ -16,8 +16,8 @@ const Card = ({ index, flag, name, capital, region, population}: CardProps) => {
           <div className="aspect-video w-full" >
               <Image className="w-full h-full object-cover" src={flag} alt={name} width={500} height={500} priority={index < 10}/>
           </div>
-          <div className="p-4 text-sm text-gray-600">
-              <h2 className="text-lg font-semibold mb-2">{name}</h2>
+          <div className="p-6 text-sm text-gray-600">
+              <h2 className="text-lg font-extrabold mb-4">{name}</h2>
               <div className="space-y-2">
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">Capital</span>

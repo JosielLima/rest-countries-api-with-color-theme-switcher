@@ -17,10 +17,10 @@ const Select = ( {options, selectedRegion, setSelectedRegion}: SelectProps) => {
     }
 
     return (
-        <div className="md:w-1/3 relative">
+        <div className="md:w-1/5 relative">
             <div>
                 <button type="button" aria-expanded={isOpen} aria-controls="region-menu" aria-label="Open region menu" aria-haspopup="listbox"  
-                    onClick={() => setIsOpen(!isOpen)} className="w-full rounded-lg border-gray-4 mb-4 px-4 py-2 shadow-sm focus:ring-2 focus:ring-gray-200 focus:outline-none flex items-center justify-between ">
+                    onClick={() => setIsOpen(!isOpen)} className="w-full rounded-lg border-gray-4 mb-4 px-4 py-4 bg-white shadow-sm focus:ring-2 focus:ring-gray-200 focus:outline-none flex items-center justify-between ">
                     {selectedRegion}
                     <ChevronDownIcon className={`size-4 ${isOpen ? 'transform rotate-180' : ''}`}  />
                 </button>
